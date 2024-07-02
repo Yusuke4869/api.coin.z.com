@@ -5,9 +5,8 @@ export const dynamic = "force-dynamic";
 export const GET = async (request: Request, { params }: { params: { mode: string } }) => {
   const { searchParams } = new URL(request.url);
   const res = await fetch(`https://forex-api.coin.z.com/public/v1/${params.mode}?${searchParams.toString()}`);
-  const json = await res.json();
 
-  return NextResponse.json(json, {
+  return NextResponse.json(await res.json(), {
     status: res.status,
     headers: {
       "Access-Control-Allow-Origin": "*",
